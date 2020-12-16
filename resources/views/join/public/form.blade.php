@@ -151,7 +151,7 @@
                             <span class="help-block mt-2 mb-0 has-error">{{ $errors->first('apex') }}</span>
                         @endif
 
-                        <span class="help-block">Members are required to own the Apex expansion.</span>
+                        <span class="help-block">Owning it is not mandatory.</span>
                         <select class="form-control" name="apex" data-placeholder="Select">
                             <option value="0" {{ (old('apex') == '0') ? 'selected="true"' : '' }}>No</option>
                             <option value="1" {{ (old('apex') == '1') ? 'selected="true"' : '' }}>Yes</option>
