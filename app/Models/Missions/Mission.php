@@ -129,6 +129,22 @@ class Mission extends Model implements HasMediaConversions
     ];
 
     /**
+     * Side represented as an integer as used by TMF_OrbatSettings
+     * From: https://community.bistudio.com/wiki/BIS_fnc_sideID
+     * 
+     * @var array
+     */
+    public static $sideMap = [
+        "opfor" => 0,
+        "east" => 0,
+        "blufor" => 1,
+        "west" => 1,
+        "independent" => 2,
+        "resistance" => 2,
+        "civilian" => 3
+    ];
+
+    /**
      * Constructor method.
      *
      * @return void
@@ -686,6 +702,7 @@ class Mission extends Model implements HasMediaConversions
         $briefingsArray = $this->parseBriefings($contents['mission']['briefings']);
         $this->briefings = json_encode($briefingsArray);
         $this->dependencies = json_encode($contents['mission']['dependencies']);
+        $this->orbatSettings = json_encode($this->orbatFromOrbatSettings($contents['mission']['orbatSettings'], $contents['mission']['groups']));
         if(array_key_exists('date', $contents['mission'])) {
             $this->date = $contents['mission']['date'];
         }
@@ -1153,5 +1170,85 @@ class Mission extends Model implements HasMediaConversions
         });
 
         return $filtered;
+    }
+
+    /**
+     * Returns the mission's orbat
+     *
+     * @return array
+     */
+    public function orbat()
+    {
+        return json_decode($this->orbatSettings);
+    }
+
+    /**
+     * Returns a minimal version of orbatSettings for displaying on the website
+     *
+     * @return array
+     */
+    private function orbatFromOrbatSettings(array $orbats, array &$groups)
+    {
+        foreach ($orbats as &$faction) {
+            $this->minimiseLevel($faction[1]);
+            $faction = $faction[1];
+        }
+
+        $orbatGroups = array();
+        foreach ($groups as &$group) {
+            if (isset($group['orbatParent'])) {
+                $faction = self::$sideMap[$group['side']];
+                $orbatParent = $group['orbatParent'];
+                $minimalGroup = array(isset($group['name']) ? $group['name'] : "NOT NAMED", array());
+
+                foreach ($group['units'] as $unit) {
+                    $desc = explode("@", $unit['description'])[0];
+                    array_push($minimalGroup[1], $desc);
+                }
+
+                if (!isset($orbatGroups[$faction])) {
+                    $orbatGroups[$faction] = array();
+                }
+
+                if (!isset($orbatGroups[$faction][$orbatParent])) {
+                    $orbatGroups[$faction][$orbatParent] = array($minimalGroup);
+                } else {
+                    array_push($orbatGroups[$faction][$orbatParent], $minimalGroup);
+                }
+            }
+        }
+
+        foreach ($orbats as $faction => &$orbat) {
+            if (!is_array($orbat)) {
+                unset($orbats[$faction]);
+                continue;
+            }
+            
+            $orbatModified = false;
+            array_walk_recursive($orbat, function(&$item) use (&$orbatGroups, $faction, &$orbatModified) {if (is_int($item) && isset($orbatGroups[$faction][$item])) {$item = $orbatGroups[$faction][$item]; $orbatModified = true;} });
+            
+            if (!$orbatModified) {
+                unset($orbats[$faction]);
+            }
+        }
+
+        return $orbats;
+    }
+
+    /**
+     * Recursive function used by $this->orbatFromOrbatSettings()
+     */
+    private function minimiseLevel(array &$level)
+    {
+        $name = strlen($level[0][1]) > 0 ? $level[0][1] : $level[0][4]; //If an abbrievation is defined then use it, otherwise full name
+        $level[0] = array($level[0][0], $name); // The UniqueId used to match orbat group to playable unit
+
+        if (count($level[1]) === 0) {
+            unset($level[1]);
+        } else {
+            foreach ($level[1] as $i => &$subLevel) {
+                $this->minimiseLevel($subLevel);
+            }
+        }
     }
 }

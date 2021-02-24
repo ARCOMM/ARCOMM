@@ -260,6 +260,12 @@ class MissionController extends Controller
         $mission->lockBriefing($request->faction, $request->locked);
     }
 
+    public function orbat(Request $request)
+    {
+        $mission = Mission::find($request->mission_id);
+        return view('missions.orbat', compact('mission'));
+    }
+
     /**
      * Updates the mission verification boolean.
      *

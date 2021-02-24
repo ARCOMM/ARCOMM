@@ -93,6 +93,9 @@ Route::group(['middleware' => 'member'], function () {
     Route::post('/hub/missions/briefing', 'Missions\MissionController@briefing');
     Route::post('/hub/missions/briefing/update', 'Missions\MissionController@setBriefingLock');
 
+    // Mission ORBAT
+    Route::post('/hub/missions/orbat', 'Missions\MissionController@orbat');
+
     // Missions
     Route::get('/hub/missions/{mission}/delete', 'Missions\MissionController@destroy');
     Route::post('/hub/missions/{mission}/update', 'Missions\MissionController@update');

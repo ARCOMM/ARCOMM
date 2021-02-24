@@ -98,6 +98,12 @@
 
                 <a
                     href="javascript:void(0)"
+                    data-panel="orbat"
+                    class="subnav-link ripple"
+                >ORBAT</a>
+
+                <a
+                    href="javascript:void(0)"
                     data-panel="aar"
                     class="subnav-link ripple"
                 >After-Action Report</a>

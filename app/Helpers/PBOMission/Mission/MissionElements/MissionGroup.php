@@ -4,7 +4,7 @@
   use App\Helpers\PBOMission\Mission\MissionElements\MissionUnit;
   use App\Helpers\PBOMission\Mission\SQMClass;
 
-  define('MISSION_GROUP_EXPORT_KEYS', array('id','name','side'));
+  define('MISSION_GROUP_EXPORT_KEYS', array('id','name','side', 'orbatParent'));
 
   class MissionGroup {
     // All groups
@@ -17,6 +17,7 @@
     public $name;
     public $playableUnits = array();
     public $crewLinks = array();
+    public $orbatParent;
 
     function __construct(SQMClass $group) {
       $this->id = $group->attribute('id');
@@ -46,12 +47,21 @@
       $this->side = $group->attribute('side');
       if ($this->side) $this->side = mb_strtolower($this->side);
 
-      // Get group custom name
-      if ($customAttributes = $group->class('CustomAttributes')) {
-        foreach ($customAttributes->classes as $customAttribute) {
-          if ($customAttribute->attribute('property') != 'groupID') continue;
-          if (!$customAttribute->hasClassPath('Value','data')) break;
-          $this->name = $customAttribute->class('Value')->class('data')->attribute('value');
+      // Get group custom name and orbatParent
+      if ($customAttributes = $group->class('CustomAttributes')) 
+      {
+        foreach ($customAttributes->classes as $customAttribute) 
+        {
+          if ($customAttribute->attribute('property') == 'groupID') 
+          {
+            if (!$customAttribute->hasClassPath('Value','data')) break;
+            $this->name = $customAttribute->class('Value')->class('data')->attribute('value');
+          } 
+          elseif ($customAttribute->attribute('property') == 'TMF_OrbatParent') 
+          {
+            if (!$customAttribute->hasClassPath('Value','data')) break;
+            $this->orbatParent = intval($customAttribute->class('Value')->class('data')->attribute('value'));
+          }
         }
       }
 
