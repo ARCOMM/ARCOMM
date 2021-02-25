@@ -1,10 +1,15 @@
 
 @php
-        $levels = (array)$mission->orbat();
+$factions = (array)$mission->orbat();
 @endphp
 
-@if(!is_null($levels))
+@if(!is_null($factions))
         <div class="pull-left w-100 m-t-3">
-                @each('partials.orbat', $levels, 'level', 'partials.orbat-none')
+        @foreach($factions as $name => $level)
+                <h2>{{ $name }}</h2>
+                <ul>
+                        @include('partials.orbat', $level)
+                </ul>
+        @endforeach
         </div>
 @endif

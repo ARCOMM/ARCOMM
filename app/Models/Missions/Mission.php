@@ -1203,7 +1203,7 @@ class Mission extends Model implements HasMediaConversions
 
                 foreach ($group['units'] as $unit) {
                     $desc = explode("@", $unit['description'])[0];
-                    array_push($minimalGroup[1], $desc);
+                    array_push($minimalGroup[1], array($desc));
                 }
 
                 if (!isset($orbatGroups[$faction])) {
@@ -1223,16 +1223,26 @@ class Mission extends Model implements HasMediaConversions
                 unset($orbats[$faction]);
                 continue;
             }
-            
+
             $orbatModified = false;
-            array_walk_recursive($orbat, function(&$item) use (&$orbatGroups, $faction, &$orbatModified) {if (is_int($item) && isset($orbatGroups[$faction][$item])) {$item = $orbatGroups[$faction][$item]; $orbatModified = true;} });
-            
+            $this->replaceIntWithUnits($orbat[1], $faction, $orbatGroups, $orbatModified);
+
             if (!$orbatModified) {
                 unset($orbats[$faction]);
             }
         }
 
-        return $orbats;
+        $this->removeAllIntsAndEmptyArrays($orbats);
+        // Reindex array after everything has been unset
+        $orbats = array_map('array_values', $orbats);
+
+        $namedOrbats = array();
+        foreach($orbats as $faction => &$orbat) {
+            $factionName = array_search($faction, self::$sideMap);
+            $namedOrbats[$factionName] = &$orbat;
+        }
+
+        return $namedOrbats;
     }
 
     /**
@@ -1241,14 +1251,66 @@ class Mission extends Model implements HasMediaConversions
     private function minimiseLevel(array &$level)
     {
         $name = strlen($level[0][1]) > 0 ? $level[0][1] : $level[0][4]; //If an abbrievation is defined then use it, otherwise full name
-        $level[0] = array($level[0][0], $name); // The UniqueId used to match orbat group to playable unit
+        $uniqueId = $level[0][0];
+        $level[0] = $name;
 
         if (count($level[1]) === 0) {
-            unset($level[1]);
+            $level[1] = array($uniqueId);
         } else {
             foreach ($level[1] as $i => &$subLevel) {
                 $this->minimiseLevel($subLevel);
             }
+            array_unshift($level[1], $uniqueId);
         }
+    }
+
+    private function replaceIntWithUnits(array &$item, int &$faction, array &$orbatGroups, bool &$orbatModified)
+    { 
+        if (is_int($item[0])) {
+            if (isset($orbatGroups[$faction][$item[0]])) {
+                $units = &$orbatGroups[$faction][$item[0]];
+                unset($item[0]);
+    
+                foreach ($units as $unit) {
+                    array_unshift($item, $unit);
+                }
+                $orbatModified = true;
+            }
+            else {
+                unset($item[0]);
+            }
+        }
+
+        foreach($item as &$subitem) {
+            if (is_array($subitem)) {
+                $this->replaceIntWithUnits($subitem, $faction, $orbatGroups, $orbatModified);
+            }
+        }
+    }
+
+    private function removeAllIntsAndEmptyArrays(array &$item)
+    {
+        // Only have name + empty array - remove entire item
+        if (isset($item[1]) && is_array($item[1]) && empty($item[1])) {
+            $item = NULL;
+            return;
+        }
+
+        // Recursively find every int and empty array and replace them will NULL
+        foreach ($item as &$subitem) {
+            if (is_int($subitem)) {
+                $subitem = NULL;
+            } elseif (is_array($subitem)) {
+                if (empty($subitem)) {
+                    $subitem = NULL;
+                } else {
+                    $this->removeAllIntsAndEmptyArrays($subitem);
+                }
+            }
+        }
+
+        // unset() used on a &reference will unset the reference but not the original value
+        // instead we set everything to NULL and use array_filter, which will unset the original value
+        $item = array_filter($item);
     }
 }
