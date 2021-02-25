@@ -1309,6 +1309,12 @@ class Mission extends Model implements HasMediaConversions
             }
         }
 
+        // Double check if array is empty now that all the children have been unset
+        if (isset($item[1]) && is_array($item[1]) && empty($item[1])) {
+            $item = NULL;
+            return;
+        }
+
         // unset() used on a &reference will unset the reference but not the original value
         // instead we set everything to NULL and use array_filter, which will unset the original value
         $item = array_filter($item);
