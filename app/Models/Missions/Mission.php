@@ -702,7 +702,12 @@ class Mission extends Model implements HasMediaConversions
         $briefingsArray = $this->parseBriefings($contents['mission']['briefings']);
         $this->briefings = json_encode($briefingsArray);
         $this->dependencies = json_encode($contents['mission']['dependencies']);
-        $this->orbatSettings = json_encode($this->orbatFromOrbatSettings($contents['mission']['orbatSettings'], $contents['mission']['groups']));
+        try {
+            $this->orbatSettings = json_encode($this->orbatFromOrbatSettings($contents['mission']['orbatSettings'], $contents['mission']['groups']));
+        } catch (Exception $e) {
+            $this->orbatSettings = json_encode(array("Error extracting ORBAT:" => array($e->getMessage())));
+        }
+
         if(array_key_exists('date', $contents['mission'])) {
             $this->date = $contents['mission']['date'];
         }
