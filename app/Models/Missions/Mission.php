@@ -1275,7 +1275,9 @@ class Mission extends Model implements HasMediaConversions
             if (isset($orbatGroups[$faction][$item[0]])) {
                 $units = &$orbatGroups[$faction][$item[0]];
                 unset($item[0]);
-    
+                
+                $units = array_reverse($units);
+                
                 foreach ($units as $unit) {
                     array_unshift($item, $unit);
                 }
