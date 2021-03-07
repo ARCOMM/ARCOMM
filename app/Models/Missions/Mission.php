@@ -1182,9 +1182,29 @@ class Mission extends Model implements HasMediaConversions
      *
      * @return array
      */
-    public function orbat()
+    public function getOrbat()
     {
-        return json_decode($this->orbatSettings);
+        return (array)json_decode($this->orbatSettings);
+    }
+
+    public function orbat($faction)
+    {
+        $orbat = $this->getOrbat();
+        if (isset($orbat[$faction])) {
+            return $orbat[$faction];
+        }
+
+        return array();
+    }
+
+    public function orbatFactions()
+    {
+        $orbat = $this->getOrbat();
+        if (is_null($orbat)) {
+            return array();
+        }
+
+        return array_keys($orbat);
     }
 
     /**

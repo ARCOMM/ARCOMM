@@ -263,7 +263,8 @@ class MissionController extends Controller
     public function orbat(Request $request)
     {
         $mission = Mission::find($request->mission_id);
-        return view('missions.orbat', compact('mission'));
+        $faction = $request->faction;
+        return view('missions.orbat', compact('mission', 'faction'));
     }
 
     /**
