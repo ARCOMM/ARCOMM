@@ -1191,10 +1191,10 @@ class Mission extends Model implements HasMediaConversions
     {
         $orbat = $this->getOrbat();
         if (isset($orbat[$faction])) {
-            return $orbat[$faction];
+            return (array)$orbat[$faction];
         }
 
-        return array();
+        return (array)array();
     }
 
     public function orbatFactions()

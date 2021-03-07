@@ -1,5 +1,5 @@
 @php
-    $level = (array)$mission->orbat($faction);
+    $level = $mission->orbat($faction);
 @endphp
 
 <div class="pull-left w-100 m-t-3">
