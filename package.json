@@ -23,7 +23,7 @@
         "jquery-ui-bundle": "^1.11.4",
         "jquery.waitforimages": "^2.2.0",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.21",
         "magnific-popup": "^1.1.0",
         "popper.js": "^1.12.3",
         "tributejs": "^2.3.4",
