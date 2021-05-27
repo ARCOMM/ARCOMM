@@ -86,7 +86,7 @@
 
 <div class="pull-left w-100 m-b-2" style="padding: .5rem .5rem 0 .5rem; border: 1px">
     <a href="javascript:void(0)" class="mission-media-video-upload btn btn-primary btn-raised pull-right m-l-1" data-mission="{{ $mission->id }}">
-        <i class="fa fa-youtube m-r-1"></i> Video
+        <i class="fa fa-twitch m-r-1"></i> Clip
     </a>
 
     <a href="javascript:void(0)" class="mission-media-upload btn btn-primary btn-raised pull-right">
@@ -105,6 +105,10 @@
             ])
         @endforeach
 
+        @if (!$mission->videos->isEmpty() && !$mission->photos()->isEmpty())
+            <p class="text-xs-center text-muted">Twitch Clips</p>
+        @endif
+        
         @foreach ($mission->videos as $video)
             @include('missions.media.video', [
                 'video' => $video
