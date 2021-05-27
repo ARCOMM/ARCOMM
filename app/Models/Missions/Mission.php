@@ -469,14 +469,7 @@ class Mission extends Model implements HasMediaConversions
     {
         $revisions = $this->revisions()->count();
 
-        $download = 'ARC_' .
-            strtoupper($this->mode == 'adversarial' ? 'tvt' : $this->mode) . '_' .
-            studly_case($this->display_name) . '_' .
-            trim(substr($this->user->username, 0, 4)) . '_' .
-            $revisions . '.' .
-            $this->map->class_name . '.' . $format;
-
-        return $download;
+        return $this->original["file_name"] . '.' . $revisions . '.' . $format;
     }
 
     /**
