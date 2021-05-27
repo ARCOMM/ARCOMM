@@ -44,7 +44,7 @@
         $('.mission-media-video-upload').click(function(event) {
             var caller = $(this);
             var mission_id = caller.data('mission');
-            var video_url = prompt("Please enter your YouTube video's full URL");
+            var video_url = prompt("Please enter twitch clip");
 
             if (video_url != null) {
                 $.ajax({
@@ -84,7 +84,7 @@
     });
 </script>
 
-<div class="pull-left w-100 m-b-2" style="padding: .5rem .5rem 0 .5rem;">
+<div class="pull-left w-100 m-b-2" style="padding: .5rem .5rem 0 .5rem; border: 1px">
     <a href="javascript:void(0)" class="mission-media-video-upload btn btn-primary btn-raised pull-right m-l-1" data-mission="{{ $mission->id }}">
         <i class="fa fa-youtube m-r-1"></i> Video
     </a>
@@ -105,10 +105,10 @@
             ])
         @endforeach
 
-        {{-- @foreach ($mission->videos as $video)
+        @foreach ($mission->videos as $video)
             @include('missions.media.video', [
                 'video' => $video
             ])
-        @endforeach --}}
+        @endforeach                    
     @endif
 </div>

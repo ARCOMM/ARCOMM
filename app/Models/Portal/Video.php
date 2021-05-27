@@ -45,17 +45,7 @@ class Video extends Model
      */
     public static function parseUrl($url)
     {
-        return Youtube::parseVidFromURL($url);
-    }
-
-    /**
-     * Gets the YouTube video info.
-     *
-     * @return object
-     */
-    public function info()
-    {
-        return Youtube::getVideoInfo($this->video_key);
+        return ltrim(parse_url($url)["path"],"/");
     }
 
     /**
@@ -65,6 +55,8 @@ class Video extends Model
      */
     public function url()
     {
-        return 'https://www.youtube.com/watch?v=' . $this->video_key;
+        $urlWithoutHttpPrefix = parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST);
+
+        return 'https://clips.twitch.tv/embed?clip=' . $this->video_key . "&parent=" . $urlWithoutHttpPrefix;
     }
 }

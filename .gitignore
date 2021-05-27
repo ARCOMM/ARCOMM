@@ -2,6 +2,7 @@
 /public/storage
 /public/downloads
 /public/_media
+/storage
 /vendor
 /.idea
 Homestead.json
