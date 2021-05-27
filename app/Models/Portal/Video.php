@@ -55,6 +55,6 @@ class Video extends Model
      */
     public function url()
     {
-        return 'https://clips.twitch.tv/embed?clip=' . $this->video_key . "&parent=arcomm.co.uk";
+        return 'https://clips.twitch.tv/embed?clip=' . $this->video_key . "&parent=arcomm.co.uk&parent=arcomm.co&parent=localhost";
     }
 }

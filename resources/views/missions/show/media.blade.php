@@ -113,6 +113,6 @@
             @include('missions.media.video', [
                 'video' => $video
             ])
-        @endforeach                    
+        @endforeach
     @endif
 </div>
