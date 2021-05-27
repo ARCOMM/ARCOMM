@@ -3,8 +3,8 @@
             frameborder="0" 
             allowfullscreen="true" 
             scrolling="no" 
-            height="400" 
-            width="400">
+            height="520" 
+            width="520">
     </iframe>
 
     @if ($video->isMine() || auth()->user()->hasPermission('mission_media:delete'))
