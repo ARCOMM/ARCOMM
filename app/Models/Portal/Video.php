@@ -55,8 +55,6 @@ class Video extends Model
      */
     public function url()
     {
-        $urlWithoutHttpPrefix = parse_url("arcomm.co.uk", PHP_URL_HOST);
-
-        return 'https://clips.twitch.tv/embed?clip=' . $this->video_key . "&parent=" . $urlWithoutHttpPrefix;
+        return 'https://clips.twitch.tv/embed?clip=' . $this->video_key . "&parent=arcomm.co.uk";
     }
 }
