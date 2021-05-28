@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DiscordWebhook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\JoinRequestAcknowledged;
 use App\Models\JoinRequests\JoinSource;
 use App\Models\JoinRequests\JoinRequest;
-use App\Notifications\JoinRequestReceived;
 
 class PublicJoinController extends Controller
 {
@@ -69,9 +69,9 @@ class PublicJoinController extends Controller
 
         // Create the join request if there are no form errors
         $jr = JoinRequest::create($form);
+        $jrUrl = url('/hub/applications/show/'.$jr->id);
 
-        // Discord message
-        $jr->notify(new JoinRequestReceived($jr));
+        DiscordWebhook::notifyStaff("**{$jr->name}** submitted an application\n{$jrUrl}");
 
         Mail::to($jr->email)->send(new JoinRequestAcknowledged);
 

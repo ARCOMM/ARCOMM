@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\StaffProxy;
-
 if (!function_exists('property_path_exists')) {
     function property_path_exists($object, $property_path)
     {
@@ -26,13 +24,5 @@ if (!function_exists('property_path_exists_throw')) {
         } else {
             throw new \Exception('Mission Error');
         }
-    }
-}
-
-if (!function_exists('staffProxy')) {
-    function staffProxy()
-    {
-        return StaffProxy::first()
-            ?: StaffProxy::create();
     }
 }

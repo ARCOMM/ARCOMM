@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Missions;
 
+use App\DiscordWebhook;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Missions\Mission;
 use App\Models\Missions\MissionComment;
-use App\Notifications\MissionCommentAdded;
 
 class CommentController extends Controller
 {
@@ -53,7 +53,7 @@ class CommentController extends Controller
 
             if ($comment->published) {
                 $mission = Mission::findOrFail($request->mission_id);
-                static::notify($mission, $comment);
+                static::discordNotify($comment);
 
                 $comment->update([
                     'created_at' => now(),
@@ -76,7 +76,7 @@ class CommentController extends Controller
 
             if ($shouldNotify) {
                 $mission = Mission::findOrFail($request->mission_id);
-                static::notify($mission, $comment);
+                static::discordNotify($comment);
 
                 $comment->update([
                     'created_at' => now(),
@@ -119,14 +119,8 @@ class CommentController extends Controller
         $comment->delete();
     }
 
-    /**
-     * Notifies all users of a new comment.
-     *
-     * @return any
-     */
-    public static function notify(Mission $mission, MissionComment $comment)
+    public static function discordNotify(MissionComment $comment)
     {
-        // Discord Message
-        $mission->notify(new MissionCommentAdded($comment, true));
+        DiscordWebhook::notifyArchub("**{$comment->user->username}** commented on the mission **{$comment->mission->display_name}** {$comment->mission->url()}/aar#comment-{$comment->id}");
     }
 }

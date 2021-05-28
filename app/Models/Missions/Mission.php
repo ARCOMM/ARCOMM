@@ -11,16 +11,10 @@ use App\Helpers\ArmaScript;
 use App\Models\Portal\User;
 use Spatie\MediaLibrary\Media;
 use App\Helpers\ArmaConfigError;
-use App\Notifications\MissionUpdated;
-use App\Notifications\MissionVerified;
 use Illuminate\Database\Eloquent\Model;
-use App\Notifications\MissionPublished;
-use App\Notifications\MissionNoteAdded;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\MentionedInComment;
 use Kingsley\Mentions\Traits\HasMentions;
 use Kingsley\References\Models\Reference;
-use App\Notifications\MissionCommentAdded;
 use App\Models\Operations\OperationMission;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
@@ -207,16 +201,6 @@ class Mission extends Model implements HasMediaConversions
     }
 
     /**
-     * Discord notification channel.
-     *
-     * @return any
-     */
-    public function routeNotificationForDiscord()
-    {
-        return config('services.discord.channel_id');
-    }
-
-    /**
      * Media library image conversions.
      *
      * @return void
@@ -243,24 +227,6 @@ class Mission extends Model implements HasMediaConversions
         }
 
         return json_decode(json_decode($value));
-    }
-
-    /**
-     * Gets the unread comments on the mission.
-     *
-     * @return Collection App\Models\Missions\MissionComment
-     */
-    public function unreadComments()
-    {
-        $mission = $this;
-
-        $filtered = auth()->user()->unreadNotifications->filter(function ($item) use ($mission) {
-            return
-                $item->type == MissionCommentAdded::class &&
-                $item->data['comment']['mission_id'] == $mission->id;
-        });
-
-        return $filtered;
     }
 
     /**
@@ -1107,74 +1073,6 @@ class Mission extends Model implements HasMediaConversions
         $details->map = $map;
 
         return $details;
-    }
-
-    /**
-     * Gets the mission note notifications.
-     *
-     * @return Collection
-     */
-    public function noteNotifications()
-    {
-        $filtered = auth()->user()->unreadNotifications->filter(function ($item) {
-            return
-                $item->type == MissionNoteAdded::class &&
-                $item->data['note']['mission_id'] == $this->id;
-        });
-
-        return $filtered;
-    }
-
-    /**
-     * Gets the mission comments notifications.
-     *
-     * @return Collection
-     */
-    public function commentNotifications()
-    {
-        $filtered = auth()->user()->unreadNotifications->filter(function ($item) {
-            return
-                ($item->type == MissionCommentAdded::class &&
-                $item->data['comment']['mission_id'] == $this->id) ||
-                ($item->type == MentionedInComment::class &&
-                $item->data['mission_id'] == $this->id);
-        });
-
-        return $filtered;
-    }
-
-    /**
-     * Gets the mission verification notifications.
-     *
-     * @return Collection
-     */
-    public function verifiedNotifications()
-    {
-        $filtered = auth()->user()->unreadNotifications->filter(function ($item) {
-            return
-                $item->type == MissionVerified::class &&
-                $item->data['mission']['id'] == $this->id;
-        });
-
-        return $filtered;
-    }
-
-    /**
-     * Gets the mission updated/published notifications.
-     *
-     * @return Collection
-     */
-    public function stateNotifications()
-    {
-        $filtered = auth()->user()->unreadNotifications->filter(function ($item) {
-            return
-                ($item->type == MissionPublished::class &&
-                $item->data['mission']['id'] == $this->id) ||
-                ($item->type == MissionUpdated::class &&
-                $item->data['mission_id'] == $this->id);
-        });
-
-        return $filtered;
     }
 
     /**

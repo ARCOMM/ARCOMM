@@ -166,7 +166,6 @@ return [
 
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
@@ -179,7 +178,6 @@ return [
         Chumper\Zipper\ZipperServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Kingsley\Mentions\MentionServiceProvider::class,
-        NotificationChannels\Discord\DiscordServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class
     ],
 

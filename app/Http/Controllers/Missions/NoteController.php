@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Missions;
 
+use App\DiscordWebhook;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Missions\MissionNote;
 use App\Models\Missions\Mission;
-use App\Notifications\MissionNoteAdded;
 
 class NoteController extends Controller
 {
@@ -44,8 +44,6 @@ class NoteController extends Controller
      */
     public function index(Request $request, Mission $mission)
     {
-        $this->readNotifications($request, $mission);
-
         if (!auth()->user()->hasPermission('mission:notes') && !$mission->isMine()) {
             return redirect($mission->url());
         }
@@ -89,8 +87,7 @@ class NoteController extends Controller
 
         $note->mention($request->mentions, false);
 
-        // Discord Message
-        $mission->notify(new MissionNoteAdded($note, true));
+        DiscordWebhook::notifyArchub( "**{$note->user->username}** added a note to the mission **{$note->mission->display_name}** {$note->mission->url()}/notes#note-{$note->id}");
 
         return view('missions.notes.item', compact('note'));
     }
@@ -144,17 +141,5 @@ class NoteController extends Controller
         $note->unmention($note->mentions());
 
         $note->delete();
-    }
-
-    /**
-     * Marks all note notifications for the mission as read.
-     *
-     * @return any
-     */
-    public function readNotifications(Request $request, Mission $mission)
-    {
-        foreach ($mission->noteNotifications() as $notification) {
-            $notification->delete();
-        }
     }
 }
