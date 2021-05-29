@@ -716,7 +716,7 @@ class Mission extends Model implements HasMediaConversions
         $this->save();
 
         // Move to cloud storage
-        //$this->deployCloudFiles();
+        $this->deployCloudFiles();
 
         return $this;
     }
