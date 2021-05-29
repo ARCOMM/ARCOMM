@@ -178,8 +178,6 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
-        Kingsley\Mentions\MentionServiceProvider::class,
-        NotificationChannels\Discord\DiscordServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class
     ],
 

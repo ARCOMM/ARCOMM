@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f692e420fb0d743143ae84a5bbc1ccf7",
+    "content-hash": "2fc505442ca72dbd8935b4b8d0c4e54b",
     "packages": [
         {
             "name": "TrafficCophp/ByteBuffer",
@@ -1518,66 +1518,6 @@
             "description": "Pull database rows from a live server.",
             "homepage": "https://github.com/jameslkingsley/laravel-livedata",
             "time": "2018-02-16T16:35:17+00:00"
-        },
-        {
-            "name": "jameslkingsley/laravel-mentions",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jameslkingsley/laravel-mentions.git",
-                "reference": "a7e11a07d15fef48e0f64e87cb9889fafc010f10"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jameslkingsley/laravel-mentions/zipball/a7e11a07d15fef48e0f64e87cb9889fafc010f10",
-                "reference": "a7e11a07d15fef48e0f64e87cb9889fafc010f10",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^5.5",
-                "illuminate/http": "^5.5",
-                "illuminate/routing": "^5.5",
-                "illuminate/support": "^5.5",
-                "php": "^7.1"
-            },
-            "require-dev": {
-                "fzaninotto/faker": "^1.4",
-                "mockery/mockery": "^0.9",
-                "orchestra/testbench": "3.5",
-                "phpunit/phpunit": "6.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Kingsley\\Mentions\\MentionServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Kingsley\\Mentions\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "James Kingsley",
-                    "email": "jameslkingsley@outlook.com",
-                    "homepage": "https://github.com/jameslkingsley",
-                    "role": "Developer"
-                }
-            ],
-            "description": "End-to-end mentions in Laravel 5.",
-            "homepage": "https://github.com/jameslkingsley/laravel-mentions",
-            "keywords": [
-                "laravel",
-                "mentions"
-            ],
-            "time": "2019-10-15T15:00:35+00:00"
         },
         {
             "name": "jameslkingsley/laravel-references",
@@ -7667,7 +7607,6 @@
     "stability-flags": {
         "alaouy/youtube": 20,
         "austinb/gameq": 20,
-        "jameslkingsley/laravel-mentions": 20,
         "jameslkingsley/laravel-references": 20,
         "superbalist/flysystem-google-storage": 20,
         "superbalist/laravel-google-cloud-storage": 20
@@ -7678,5 +7617,5 @@
         "php": ">=7.0.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

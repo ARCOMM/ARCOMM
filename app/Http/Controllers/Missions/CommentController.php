@@ -49,8 +49,6 @@ class CommentController extends Controller
             $comment->published = $request->published;
             $comment->save();
 
-            $mentions = $comment->mention($request->mentions, false);
-
             if ($comment->published) {
                 $mission = Mission::findOrFail($request->mission_id);
                 static::notify($mission, $comment);
@@ -69,10 +67,6 @@ class CommentController extends Controller
             $comment->text = $request->text;
             $comment->published = $request->published;
             $comment->save();
-
-            // Reset the mentions
-            $comment->unmention($comment->mentions());
-            $mentions = $comment->mention($request->mentions, false);
 
             if ($shouldNotify) {
                 $mission = Mission::findOrFail($request->mission_id);
@@ -101,8 +95,7 @@ class CommentController extends Controller
     public function edit(MissionComment $comment)
     {
         return json_encode([
-            'text' => $comment->text,
-            'mentions' => $comment->mentions()->encoded()
+            'text' => $comment->text
         ]);
     }
 
@@ -114,8 +107,6 @@ class CommentController extends Controller
      */
     public function destroy(MissionComment $comment)
     {
-        $comment->unmention($comment->mentions());
-
         $comment->delete();
     }
 

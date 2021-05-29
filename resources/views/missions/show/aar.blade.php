@@ -34,7 +34,6 @@
                         $('#submit-mission-comment input[name="id"]').val(id);
                         $('#submit-mission-comment textarea[name="text"]').val(data.text);
                         $('#submit-mission-comment .mission-aar-textarea').html(data.text);
-                        $('#submit-mission-comment #mentions-list').val(data.mentions);
                         $('#submit-mission-comment button[type="submit"]').html('Save Changes');
                         $('#submit-mission-comment #save-mission-comment').hide();
                         $('#submit-mission-comment textarea[name="text"]').focus();
@@ -75,7 +74,6 @@
                         $('#submit-mission-comment input[name="id"]').val(-1);
                         $('#submit-mission-comment textarea[name="text"]').val('');
                         $('#submit-mission-comment .mission-aar-textarea').html('');
-                        $('#submit-mission-comment #mentions-list').val('');
                         $('#submit-mission-comment button[type="submit"]').html('Publish');
                         $('#submit-mission-comment button[type="submit"]').prop('disabled', false);
                         $('#submit-mission-comment #save-mission-comment').show();
@@ -159,7 +157,7 @@
         <input type="hidden" name="id" value="{{ (!is_null($mission->draft())) ? $mission->draft()->id : '-1' }}">
         <input type="hidden" name="mission_id" value="{{ $mission->id }}">
         <input type="hidden" name="published" value="0">
-        <input type="hidden" name="mentions" value="{{ (!is_null($mission->draft())) ? $mission->draft()->mentions()->encoded() : '' }}" id="mentions-list">
+        <input type="hidden" name="mentions" value="" id="mentions-list">
 
         <textarea
             class="form-control"
@@ -179,9 +177,3 @@
         <button class="btn pull-right" id="save-mission-comment">Save Draft</button>
     </form>
 </div>
-
-@php
-    foreach ($mission->commentNotifications() as $notification) {
-        $notification->delete();
-    }
-@endphp

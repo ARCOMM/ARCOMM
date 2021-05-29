@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Notifications\MissionPublished;
 use App\Notifications\MissionNoteAdded;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\MentionedInComment;
-use Kingsley\Mentions\Traits\HasMentions;
 use Kingsley\References\Models\Reference;
 use App\Notifications\MissionCommentAdded;
 use App\Models\Operations\OperationMission;
@@ -30,8 +28,7 @@ use App\Helpers\PBOMission\PBOFile\PBOFile;
 class Mission extends Model implements HasMediaConversions
 {
     use Notifiable,
-        HasMediaTrait,
-        HasMentions;
+        HasMediaTrait;
 
     public $factions = [
         0 => "Opfor",
@@ -719,7 +716,7 @@ class Mission extends Model implements HasMediaConversions
         $this->save();
 
         // Move to cloud storage
-        $this->deployCloudFiles();
+        //$this->deployCloudFiles();
 
         return $this;
     }

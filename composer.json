@@ -26,7 +26,6 @@
         "guzzlehttp/guzzle": "^6.3",
         "invisnik/laravel-steam-auth": "^3.2.1",
         "jameslkingsley/laravel-livedata": "^1.0",
-        "jameslkingsley/laravel-mentions": "dev-master",
         "jameslkingsley/laravel-references": "dev-master",
         "laravel-notification-channels/discord": "^0.0.1",
         "laravel/framework": "5.5.*",

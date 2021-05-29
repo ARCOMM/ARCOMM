@@ -38,7 +38,6 @@ class Mentions {
                 }
             };
 
-            xhttp.open('post', '/api/mentions?p=' + pool.pool + '&q=' + text, true);
             xhttp.send();
         }
     }
@@ -69,7 +68,6 @@ class Mentions {
 
     listen() {
         var instance = this;
-
         this.input.addEventListener('keyup', event => {
             let input = event.target;
             let mentions = instance.output;

@@ -30,8 +30,6 @@
 - Mission verification to ensure quality on the operation day
 - Mission updates will be logged as revisions
 - Discord notifications for basically everything
-- Mention other users in comments and notes
-- Hashtag missions in comments and notes
 
 ![Screenshot 2](http://i.imgur.com/zFwuBXU.png)
 

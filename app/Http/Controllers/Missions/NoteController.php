@@ -87,8 +87,6 @@ class NoteController extends Controller
         $note->text = $request->text;
         $note->save();
 
-        $note->mention($request->mentions, false);
-
         // Discord Message
         $mission->notify(new MissionNoteAdded($note, true));
 
@@ -140,8 +138,6 @@ class NoteController extends Controller
         if (!$note->isMine()) {
             return;
         }
-
-        $note->unmention($note->mentions());
 
         $note->delete();
     }
