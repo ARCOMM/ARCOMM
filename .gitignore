@@ -11,3 +11,4 @@ Homestead.yaml
 !.env.example
 .phpintel/
 gcs.json
+composer.lock

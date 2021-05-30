@@ -4,64 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17b22bef4db90303f473f2c54d0be4ab",
+    "content-hash": "5585e336d6dc20101070950529573811",
     "packages": [
-        {
-            "name": "alaouy/youtube",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alaouy/Youtube.git",
-                "reference": "be04bbec7a548345ce4951096fffee34d329b3d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alaouy/Youtube/zipball/be04bbec7a548345ce4951096fffee34d329b3d3",
-                "reference": "be04bbec7a548345ce4951096fffee34d329b3d3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Alaouy\\Youtube\\YoutubeServiceProvider"
-                    ],
-                    "aliases": {
-                        "Youtube": "Alaouy\\Youtube\\Facades\\Youtube"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Alaouy\\Youtube\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mustapha Alaouy",
-                    "email": "alaouym@gmail.com"
-                }
-            ],
-            "description": "Laravel PHP Facade/Wrapper for the Youtube Data API v3",
-            "keywords": [
-                "alaouy",
-                "api",
-                "laravel",
-                "video",
-                "youtube"
-            ],
-            "time": "2020-05-22T11:33:08+00:00"
-        },
         {
             "name": "austinb/gameq",
             "version": "v3.x-dev",
@@ -6474,7 +6418,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "alaouy/youtube": 20,
         "austinb/gameq": 20,
         "jameslkingsley/laravel-mentions": 20,
         "jameslkingsley/laravel-references": 20,

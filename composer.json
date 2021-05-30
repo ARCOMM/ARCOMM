@@ -19,7 +19,6 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "alaouy/youtube": "dev-master",
         "austinb/gameq": "3.x-dev",
         "chumper/zipper": "1.0.x",
         "fideloper/proxy": "~3.3",
