@@ -3,6 +3,7 @@
 namespace App\Models\Portal;
 
 use Illuminate\Database\Eloquent\Model;
+use Alaouy\Youtube\Facades\Youtube;
 
 class Video extends Model
 {
