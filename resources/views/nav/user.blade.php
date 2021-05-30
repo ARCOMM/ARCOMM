@@ -1,4 +1,4 @@
-<a href="https://github.com/ARCOMM/ARCMF/releases/latest/download/ARCMF.VR.zip" class="nav-item nav-link hidden-sm-down">
+<a href="https://github.com/ARCOMM/ARCMT/releases/latest/download/ARCMT.zip" class="nav-item nav-link hidden-sm-down">
     ARCMF
     <i class="material-icons" style="margin-top: 15px;float: right;font-size: 18px;margin-left: 5px;">file_download</i>
 </a>
