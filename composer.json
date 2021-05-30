@@ -18,15 +18,15 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
+        "php": "^7.4",
         "austinb/gameq": "3.x-dev",
         "chumper/zipper": "1.0.x",
-        "fideloper/proxy": "~3.3",
+        "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^6.3",
         "invisnik/laravel-steam-auth": "^3.2.1",
         "jameslkingsley/laravel-livedata": "^1.0",
         "jameslkingsley/laravel-references": "dev-master",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "sentry/sentry-laravel": "^0.7.0",
         "spatie/laravel-medialibrary": "^6.6.6",
