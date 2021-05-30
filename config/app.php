@@ -166,7 +166,6 @@ return [
 
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
@@ -174,7 +173,6 @@ return [
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
         Syntax\SteamApi\SteamApiServiceProvider::class,
-        Alaouy\Youtube\YoutubeServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
@@ -224,7 +222,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
         'Zipper' => Chumper\Zipper\Zipper::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
     ],

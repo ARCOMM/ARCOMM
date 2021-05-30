@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\DiscordWebhook;
 use App\Models\Portal\User;
 use App\Models\Portal\SteamAPI;
 use Illuminate\Console\Command;
-use App\Notifications\UserPurged;
 
 class PurgeNonMembers extends Command
 {
@@ -58,6 +58,6 @@ class PurgeNonMembers extends Command
             $failedBag->push("**{$user->username}** could not be automatically purged from ARCHUB as they have {$missions->count()} mission(s) uploaded.");
         }
 
-        staffProxy()->notify(new UserPurged($passedBag, $failedBag));
+        DiscordWebhook::notifyStaff("{$passedBag->implode("\n")}\n\n{$failedBag->implode("\n")}");
     }
 }

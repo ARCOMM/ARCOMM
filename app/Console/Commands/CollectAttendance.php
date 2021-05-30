@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 use App\Models\Missions\Mission;
 use App\Models\Portal\Attendance;
 use App\Models\Operations\Operation;
-use App\Notifications\AttendanceCollected;
 
 class CollectAttendance extends Command
 {
@@ -153,7 +152,5 @@ class CollectAttendance extends Command
                 ], ['present' => false]);
             }
         }
-
-        // staffProxy()->notify(new AttendanceCollected($present, $absent));
     }
 }

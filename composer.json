@@ -19,7 +19,6 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "alaouy/youtube": "dev-master",
         "austinb/gameq": "3.x-dev",
         "chumper/zipper": "1.0.x",
         "fideloper/proxy": "~3.3",
@@ -27,15 +26,13 @@
         "invisnik/laravel-steam-auth": "^3.2.1",
         "jameslkingsley/laravel-livedata": "^1.0",
         "jameslkingsley/laravel-references": "dev-master",
-        "laravel-notification-channels/discord": "^0.0.1",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "sentry/sentry-laravel": "^0.7.0",
         "spatie/laravel-medialibrary": "^6.6.6",
         "superbalist/flysystem-google-storage": "dev-master#093b7e4b46f37720109e9efa594782cd0b3ced02",
         "superbalist/laravel-google-cloud-storage": "dev-master#3cb952fd4599f31bacdf36379703e85dbd0f6157",
-        "syntax/steam-api": "^2.0",
-        "team-reflex/discord-php": "^4.0"
+        "syntax/steam-api": "^2.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

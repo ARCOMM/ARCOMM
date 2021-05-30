@@ -36,9 +36,8 @@ return [
     ],
 
     'discord' => [
-        'token' => env('DISCORD_API_TOKEN'),
-        'channel_id' => env('DISCORD_CHANNEL_ID'),
-        'staff_channel_id' => env('DISCORD_STAFF_CHANNEL_ID')
+        'archub_webhook' => env('DISCORD_ARCHUB_WEBHOOK'),
+        'staff_webhook' => env('DISCORD_STAFF_WEBHOOK')
     ]
 
 ];

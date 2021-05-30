@@ -105,7 +105,6 @@ Route::group(['middleware' => 'member'], function () {
     Route::get('/hub/missions/{mission}/download/{format}', 'Missions\MissionController@download');
 
     // Notes
-    Route::get('/hub/missions/{mission}/notes/read-notifications', 'Missions\NoteController@readNotifications');
     Route::resource('/hub/missions/{mission}/notes', 'Missions\NoteController');
 
     // Panels
@@ -124,8 +123,6 @@ Route::group(['middleware' => 'member'], function () {
     Route::get('/hub/guides', function () {
         return view('guides.index');
     });
-
-    Route::get('/hub/notifications', 'Users\NotificationsController@index');
 
     // Hub Index
     Route::resource('/hub', 'HubController', [

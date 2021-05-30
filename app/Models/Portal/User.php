@@ -12,7 +12,6 @@ use App\Models\Operations\Absence;
 use App\Models\Permissions\Permission;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Permissions\PermissionUser;
-use App\Notifications\MissionCommentAdded;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
@@ -40,16 +39,6 @@ class User extends Authenticatable implements HasMediaConversions
      * @var array
      */
     protected $hidden = [];
-
-    /**
-     * Discord notification channel.
-     *
-     * @return any
-     */
-    public function routeNotificationForDiscord()
-    {
-        return config('services.discord.channel_id');
-    }
 
     /**
      * Media library image conversions.
@@ -141,20 +130,6 @@ class User extends Authenticatable implements HasMediaConversions
                 ->where('permission_id', $permission->id)
                 ->first()
         );
-    }
-
-    /**
-     * Gets unread mission comment notifications for the user.
-     *
-     * @return Collection
-     */
-    public function missionNotifications()
-    {
-        $filtered = auth()->user()->unreadNotifications->filter(function($item) {
-            return $item->type == MissionCommentAdded::class;
-        });
-
-        return $filtered;
     }
 
     /**

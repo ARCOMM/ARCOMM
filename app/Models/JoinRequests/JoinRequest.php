@@ -34,16 +34,6 @@ class JoinRequest extends Model
     ];
 
     /**
-     * Discord notification channel.
-     *
-     * @return any
-     */
-    public function routeNotificationForDiscord()
-    {
-        return config('services.discord.staff_channel_id');
-    }
-
-    /**
      * Gets the status of the join request.
      *
      * @return App\Models\JoinRequests\JoinStatus

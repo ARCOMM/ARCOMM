@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Missions;
 
+use App\DiscordWebhook;
 use Illuminate\Http\Request;
 use App\Models\Missions\Mission;
 use App\Http\Controllers\Controller;
-use App\Notifications\MissionUpdated;
-use App\Notifications\MissionVerified;
-use App\Notifications\MissionPublished;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Missions\MissionRevision;
 
@@ -73,8 +71,7 @@ class MissionController extends Controller
             // Delete local temp files
             Storage::deleteDirectory("missions/{$user->id}");
 
-            // Discord Message
-            $mission->notify(new MissionPublished($mission, true));
+            DiscordWebhook::notifyArchub("**{$mission->user->username}** submitted a mission named **{$mission->display_name}**");
 
             return $mission->url();
         }
@@ -90,21 +87,6 @@ class MissionController extends Controller
     {
         if (!$mission->verified && !$mission->existsInOperation() && !auth()->user()->hasPermission('mission:see_new') && !$mission->isMine()) {
             return redirect('/hub/missions?403=1');
-        }
-
-        // Mark comment notifications as read
-        foreach ($mission->commentNotifications() as $notification) {
-            $notification->delete();
-        }
-
-        // Mark verified notifications as read
-        foreach ($mission->verifiedNotifications() as $notification) {
-            $notification->delete();
-        }
-
-        // Mark state notifications as read
-        foreach ($mission->stateNotifications() as $notification) {
-            $notification->delete();
         }
 
         if (!$request->ajax()) {
@@ -205,9 +187,8 @@ class MissionController extends Controller
 
                 // Delete old cloud files
                 Storage::cloud()->delete("x{$old_mission_cloud_pbo_dir}");
-
-                // Discord Message
-                $mission->notify(new MissionUpdated($revision, true));
+                
+                DiscordWebhook::notifyArchub("**{$revision->user->username}** updated the mission **{$revision->mission->display_name}**");
 
                 return view('missions.show', compact('mission'));
             }
@@ -285,8 +266,7 @@ class MissionController extends Controller
         $mission->save();
 
         if ($mission->verified) {
-            // Discord Message
-            $mission->notify(new MissionVerified($mission, true));
+            DiscordWebhook::notifyArchub("**{$mission->verifiedByUser()->username}** verified the mission **{$mission->display_name}**");
         }
 
         $updated_by = auth()->user()->username;
