@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Join;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\JoinRequests\JoinRequest;
@@ -66,7 +67,7 @@ class JoinStatusController extends Controller
     {
         if (empty($request->text) || strlen($request->text) > 12) return;
 
-        $permalink = str_slug($request->text, '-');
+        $permalink = Str::slug($request->text, '-');
 
         if (!$this->joinStatuses->where('permalink', $permalink)->first()) {
             $status = $this->joinStatuses->create([

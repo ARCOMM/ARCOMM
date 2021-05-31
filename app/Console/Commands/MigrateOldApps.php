@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Models\JoinRequests\JoinStatus;
 use App\Models\JoinRequests\JoinRequest;
 
@@ -53,9 +54,9 @@ class MigrateOldApps extends Command
             $jr->location = $item->appCountry;
             $jr->email = $item->appEmail;
             $jr->steam = $item->appSteam;
-            $jr->available = (str_contains(strtolower($item->appAvailable), 'yes')) ? true : false;
-            $jr->apex = (str_contains(strtolower($item->appApex), 'yes')) ? true : false;
-            $jr->groups = (str_contains(strtolower($item->appGroups), 'yes')) ? true : false;
+            $jr->available = (Str::contains(strtolower($item->appAvailable), 'yes')) ? true : false;
+            $jr->apex = (Str::contains(strtolower($item->appApex), 'yes')) ? true : false;
+            $jr->groups = (Str::contains(strtolower($item->appGroups), 'yes')) ? true : false;
             $jr->experience = $item->appExperience;
             $jr->bio = $item->appBio;
             $jr->source_id = $item->appSource;

@@ -6,6 +6,7 @@ use GameQ\GameQ;
 use App\Models\Portal\User;
 use App\Models\Missions\Map;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use App\Models\Missions\Mission;
 use App\Models\Portal\Attendance;
 use App\Models\Operations\Operation;
@@ -100,7 +101,7 @@ class CollectAttendance extends Command
 
             foreach ($missions as $mission) {
                 $parts = explode('/', $mission->cloud_pbo);
-                $name = str_replace_last(".{$results->map}.pbo", '', end($parts));
+                $name = Str::replaceLast(".{$results->map}.pbo", '', end($parts));
 
                 if (strtolower($name) === strtolower($results->gq_gametype)) {
                     $currentMission = $mission;
@@ -124,11 +125,11 @@ class CollectAttendance extends Command
 
                 $name = preg_replace('(\[.*\])', '', $name);
                 $name = preg_replace('(\d)', '', $name);
-                $name = str_slug(strtolower(trim($name)), '-');
+                $name = Str::slug(strtolower(trim($name)), '-');
 
-                $hubName = str_slug(strtolower(trim($user->username)));
+                $hubName = Str::slug(strtolower(trim($user->username)));
 
-                if (str_contains($hubName, $name)) {
+                if (Str::contains($hubName, $name)) {
                     $found = true;
                     $present->push("{$user->username} marked as present");
 

@@ -19,7 +19,7 @@
 
         <p class="mission-item-summary">
             @unless (strlen($mission->summary) == 0)
-                {{ str_limit($mission->summary, 80) }}
+                {{ Str::limit($mission->summary, 80) }}
             @endunless
         </p>
 

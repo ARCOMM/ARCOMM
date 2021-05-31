@@ -5,6 +5,7 @@ namespace App\Helpers;
 use Log;
 use \stdClass;
 use App\Helpers\ArmaConfigError;
+use Illuminate\Support\Arr;
 
 class ArmaConfig
 {
@@ -125,7 +126,7 @@ class ArmaConfig
         foreach ($tokens as $t) {
             $token = $t['token'];
             $match = $t['match'];
-            $value = array_get($t, 'value', $match);
+            $value = Arr::get($t, 'value', $match);
 
             if ($token == 'T_BLOCKEND') {
                 $seeker = explode ('.', $seeker);
@@ -136,13 +137,13 @@ class ArmaConfig
 
             if ($token == 'T_CLASSNAME') {
                 $seeker = ($seeker == '') ? $match : $seeker . '.' . $match;
-                array_set($object, $seeker, []);
+                Arr::set($object, $seeker, []);
                 continue;
             }
 
             if ($token == 'T_ARRAY') {
                 $seeker = ($seeker == '') ? $match : $seeker . '.' . $match;
-                array_set($object, $seeker, static::cleanArray($value));
+                Arr::set($object, $seeker, static::cleanArray($value));
                 $hasAssignment = false;
                 $seeker = explode ('.', $seeker);
                 array_pop($seeker);
@@ -151,7 +152,7 @@ class ArmaConfig
             }
 
             if ($hasAssignment && in_array($token, ['T_STRING', 'T_PROP', 'T_NUMBER'])) {
-                array_set($object, $seeker, $value);
+                Arr::set($object, $seeker, $value);
                 $hasAssignment = false;
                 $seeker = explode ('.', $seeker);
                 array_pop($seeker);
@@ -161,7 +162,7 @@ class ArmaConfig
 
             if ($token == 'T_PROP' && !$hasAssignment) {
                 $seeker = ($seeker == '') ? $match : $seeker . '.' . $match;
-                array_set($object, $seeker, []);
+                Arr::set($object, $seeker, []);
                 $hasAssignment = true;
                 continue;
             }

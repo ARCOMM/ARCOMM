@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use File;
+use Illuminate\Support\Str;
 
 class ArmaScript
 {
@@ -19,20 +20,20 @@ class ArmaScript
         foreach ($files as $file) {
             $file = (string) $file;
 
-            if (!ends_with(strtolower($file), 'sqf')) {
+            if (!Str::endsWith(strtolower($file), 'sqf')) {
                 continue;
             }
 
             $lines = explode('\n', file_get_contents($file));
 
             foreach ($lines as $line) {
-                if (!starts_with(trim($line), 'comment')) {
+                if (!Str::startsWith(trim($line), 'comment')) {
                     $matches = [];
                     preg_match('/"([\S]+)"/', $line, $matches);
                     $classname = $matches[1];
 
                     foreach ($flagged as $flag) {
-                        if (starts_with(strtolower($classname), strtolower($flag))) {
+                        if (Str::startsWith(strtolower($classname), strtolower($flag))) {
                             $usedAddons->push($flag);
                         }
                     }
@@ -59,7 +60,7 @@ class ArmaScript
             foreach ($files as $file) {
                 $file = (string) $file;
 
-                if (!ends_with(strtolower($file), 'sqf')) {
+                if (!Str::endsWith(strtolower($file), 'sqf')) {
                     continue;
                 }
 
