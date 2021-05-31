@@ -11,7 +11,6 @@ use App\Helpers\ArmaScript;
 use App\Models\Portal\User;
 use Spatie\MediaLibrary\Models\Media;
 use App\Helpers\ArmaConfigError;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -631,7 +630,7 @@ class Mission extends Model implements HasMedia
     public function hasAddon($key)
     {
         foreach ($this->addons() as $addonName) {
-            if (Arr::startsWith(strtolower($addonName), strtolower($key))) {
+            if (Str::startsWith(strtolower($addonName), strtolower($key))) {
                 return true;
             }
         }
