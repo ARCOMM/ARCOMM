@@ -102,7 +102,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="description">
-                            <h4 class="header-text" style="font-weight: 600;opacity: .88;">ARCMF</h4>
+                            <h4 class="header-text" style="font-weight: 600;opacity: .88;">ARCMT</h4>
 
                             <p class="text-warm">
                                 Built from scratch, our mission framework provides us with long-lasting, robust missions that are extensible for the veteran, but simple and concise for the beginner.

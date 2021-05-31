@@ -20,8 +20,7 @@
     "require": {
         "php": "^7.4",
         "austinb/gameq": "3.x-dev",
-        "chumper/zipper": "1.0.x",
-        "fideloper/proxy": "^4.4",
+        "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "^6.3",
         "invisnik/laravel-steam-auth": "^3.2.1",
         "jameslkingsley/laravel-livedata": "^1.0",
