@@ -13,7 +13,7 @@ class AddResponsiveImagesToMediaTable extends Migration
      */
     public function up()
     {
-        Schema::table('missions', function($table) {
+        Schema::table('media', function($table) {
             $table->json('responsive_images');
         });
     }
@@ -25,7 +25,7 @@ class AddResponsiveImagesToMediaTable extends Migration
      */
     public function down()
     {
-        Schema::table('missions', function($table) {
+        Schema::table('media', function($table) {
             $table->dropColumn('responsive_images');
         });
     }
