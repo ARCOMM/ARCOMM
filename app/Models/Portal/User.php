@@ -5,18 +5,18 @@ namespace App\Models\Portal;
 use Auth;
 use Steam;
 use Carbon\Carbon;
-use Spatie\MediaLibrary\Media;
+use Spatie\MediaLibrary\Models\Media;
 use App\Models\Portal\SteamAPI;
 use App\Models\Missions\Mission;
 use App\Models\Operations\Absence;
 use App\Models\Permissions\Permission;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Permissions\PermissionUser;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
-class User extends Authenticatable implements HasMediaConversions
+class User extends Authenticatable implements HasMedia
 {
     use Notifiable;
     use HasMediaTrait;

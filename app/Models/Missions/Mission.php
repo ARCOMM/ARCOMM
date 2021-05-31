@@ -9,18 +9,18 @@ use Carbon\Carbon;
 use App\Helpers\ArmaConfig;
 use App\Helpers\ArmaScript;
 use App\Models\Portal\User;
-use Spatie\MediaLibrary\Media;
+use Spatie\MediaLibrary\Models\Media;
 use App\Helpers\ArmaConfigError;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Kingsley\References\Models\Reference;
 use App\Models\Operations\OperationMission;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use App\Helpers\PBOMission\PBOMission;
 use App\Helpers\PBOMission\PBOFile\PBOFile;
 
-class Mission extends Model implements HasMediaConversions
+class Mission extends Model implements HasMedia
 {
     use Notifiable,
         HasMediaTrait;
