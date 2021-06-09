@@ -8,22 +8,22 @@ use \stdClass;
 use Carbon\Carbon;
 use App\Helpers\ArmaConfig;
 use App\Helpers\ArmaScript;
-use App\Helpers\ArmaConfigError;
-use App\Helpers\PBOMission\PBOMission;
-use App\Helpers\PBOMission\PBOFile\PBOFile;
 use App\Models\Portal\User;
-use App\Models\Operations\OperationMission;
+use Spatie\MediaLibrary\Models\Media;
+use App\Helpers\ArmaConfigError;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Models\Operations\OperationMission;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use App\Helpers\PBOMission\PBOMission;
+use App\Helpers\PBOMission\PBOFile\PBOFile;
 
 class Mission extends Model implements HasMedia
 {
-    use Notifiable;
-    use InteractsWithMedia;
+    use Notifiable,
+        HasMediaTrait;
 
     public $factions = [
         0 => "Opfor",
@@ -142,7 +142,7 @@ class Mission extends Model implements HasMedia
      *
      * @return void
      */
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')
             ->width(384)

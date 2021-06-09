@@ -3,7 +3,7 @@
 namespace App\Models\JoinRequests;
 
 use Validator;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Input;
 use App\Models\JoinRequests\JoinSource;
 use App\Models\JoinRequests\JoinStatus;
 use Illuminate\Database\Eloquent\Model;
@@ -60,12 +60,12 @@ class JoinRequest extends Model
      */
     public static function items($s = '', $o = 'desc')
     {
-        $order = Request::input('order', $o);
+        $order = Input::get('order', $o);
 
         if (empty($s)) {
             return JoinRequest::orderBy('created_at', $o)->get();
         } else {
-            $status_str = Request::input('status', $s);
+            $status_str = Input::get('status', $s);
             $status = JoinStatus::where('permalink', strtolower($status_str))->first();
             return JoinRequest::where('status_id', $status->id)->orderBy('created_at', $order)->get();
         }

@@ -7,18 +7,29 @@
     ],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/maksimru/laravel-google-cloud-storage.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/maksimru/flysystem-google-cloud-storage.git"
+        }
+    ],
     "require": {
         "php": "^7.4",
         "austinb/gameq": "3.x-dev",
-        "fideloper/proxy": "4.4.*",
+        "fideloper/proxy": "~4.0",
         "guzzlehttp/guzzle": "^6.3",
-        "invisnik/laravel-steam-auth": "^4.3",
-        "laravel/framework": "6.20.*",
+        "invisnik/laravel-steam-auth": "^3.2.1",
+        "jameslkingsley/laravel-livedata": "^1.0",
+        "laravel/framework": "5.8.*",
         "laravel/tinker": "~1.0",
-        "nesbot/carbon": "^2.48",
-        "spatie/laravel-medialibrary": "8.*",
-        "superbalist/flysystem-google-storage": "7.2.*",
-        "superbalist/laravel-google-cloud-storage": "2.2.*",
+        "sentry/sentry-laravel": "^0.7.0",
+        "spatie/laravel-medialibrary": "7.6.*",
+        "superbalist/flysystem-google-storage": "dev-master#093b7e4b46f37720109e9efa594782cd0b3ced02",
+        "superbalist/laravel-google-cloud-storage": "dev-master#3cb952fd4599f31bacdf36379703e85dbd0f6157",
         "syntax/steam-api": "^2.0"
     },
     "require-dev": {

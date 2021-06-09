@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Mail\JoinRequestStatus;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Input;
 use App\Models\JoinRequests\JoinStatus;
 use App\Models\JoinRequests\JoinRequest;
 use App\Models\JoinRequests\EmailTemplate;

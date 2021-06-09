@@ -5,21 +5,21 @@ namespace App\Models\Portal;
 use Auth;
 use Steam;
 use Carbon\Carbon;
+use Spatie\MediaLibrary\Models\Media;
 use App\Models\Portal\SteamAPI;
 use App\Models\Missions\Mission;
 use App\Models\Operations\Absence;
 use App\Models\Permissions\Permission;
-use App\Models\Permissions\PermissionUser;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Permissions\PermissionUser;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class User extends Authenticatable implements HasMedia
 {
     use Notifiable;
-    use InteractsWithMedia;
+    use HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -45,7 +45,7 @@ class User extends Authenticatable implements HasMedia
      *
      * @return void
      */
-    public function registerMediaConversions(Media $media = null): void {}
+    public function registerMediaConversions(Media $media = null) {}
 
     /**
      * Checks whether the user is a member of the Steam group.

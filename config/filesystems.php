@@ -10,7 +10,7 @@ return [
     | by the framework. A "local" driver, as well as a variety of cloud
     | based drivers are available for your choosing. Just store away!
     |
-    | Supported: "local", "ftp", "s3"
+    | Supported: "local", "ftp", "s3", "rackspace"
     |
     */
 
