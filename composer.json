@@ -19,7 +19,6 @@
     ],
     "require": {
         "php": "^7.4",
-        "austinb/gameq": "3.x-dev",
         "fideloper/proxy": "~4.0",
         "guzzlehttp/guzzle": "^6.3",
         "invisnik/laravel-steam-auth": "^3.2.1",
