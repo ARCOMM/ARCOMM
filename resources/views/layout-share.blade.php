@@ -33,7 +33,7 @@
     <body class="bd-docs">
         <div
             class="banner @yield('banner-classes')"
-            style="background-image: url(@yield('banner'))">
+            style="background-image: url('@yield('banner')')">
             <div class="banner-fade-top"></div>
             <div class="banner-fade-bottom"></div>
         </div>
