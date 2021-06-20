@@ -26,7 +26,7 @@
                     <a
                         href="{{ url($media->getUrl()) }}"
                         class="media-item-public"
-                        style="background-image: url({{ url($media->getUrl('thumb')) }})">
+                        style="background-image: url('{{ url($media->getUrl('thumb')) }}')">
                     </a>
                 @endforeach
             @endforeach
