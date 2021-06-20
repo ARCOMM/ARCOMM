@@ -6,7 +6,7 @@
 
 @if ($mission->banner() != '')
     @section('banner')
-        {{ $mission->banner() }}
+        '{{ $mission->banner() }}''
     @endsection
 
     @section('banner-classes')
