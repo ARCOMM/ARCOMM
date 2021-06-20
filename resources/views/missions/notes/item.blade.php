@@ -1,7 +1,7 @@
 <div id="note-{{ $note->id }}" class="mission-comment-item">
     <span
         class="mission-comment-item-avatar"
-        style="background-image: url({{ $note->user->avatar }})">
+        style="background-image: url('{{ $note->user->avatar }}')">
     </span>
 
     <span class="mission-comment-item-username">

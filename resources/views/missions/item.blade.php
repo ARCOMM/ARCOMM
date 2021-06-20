@@ -1,7 +1,7 @@
 <a
     href="{{ url('/hub/missions/' . $mission->id) }}"
     class="mission-item ripple {{ (isset($classes)) ? $classes : '' }}"
-    style="background-image: url({{ $mission->thumbnail() }})"
+    style="background-image: url('{{ $mission->thumbnail() }}')"
     data-id="{{ $mission->id }}">
 
     @if (isset($pulse) && $pulse)

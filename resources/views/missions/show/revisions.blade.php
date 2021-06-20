@@ -14,7 +14,7 @@
                         class="list-group-item notification-item"
                         title="{{ $revision->created_at }}"
                         style="text-decoration: none !important;cursor: default;">
-                        <span class="notification-image" style="background-image: url({{ $revision->user->avatar }})"></span>
+                        <span class="notification-image" style="'background-image: url('{{ $revision->user->avatar }}')"></span>
 
                         <p class="list-group-item-text notification-text">
                             Updated by {{ $revision->user->username }}

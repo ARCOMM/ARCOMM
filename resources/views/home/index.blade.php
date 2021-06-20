@@ -32,7 +32,7 @@
             <div class="parallax">
                 <div
                     class="parallax-background front"
-                    style="background-image: url({{ $banners[0] }})">
+                    style="background-image: url('{{ $banners[0] }}')">
                 </div>
             </div>
 
