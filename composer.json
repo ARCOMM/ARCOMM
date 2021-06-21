@@ -10,29 +10,28 @@
     "require": {
         "php": "^7.4",
         "fideloper/proxy": "4.4.*",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^7.3.0",
         "invisnik/laravel-steam-auth": "^4.3",
-        "laravel/framework": "7.30.*",
+        "laravel/framework": "8.47.*",
+        "laravel/legacy-factories": "^1.1",
         "laravel/tinker": "^2.6",
         "nesbot/carbon": "^2.48",
         "spatie/laravel-medialibrary": "8.*",
         "superbalist/flysystem-google-storage": "7.2.*",
         "superbalist/laravel-google-cloud-storage": "2.2.*",
-        "syntax/steam-api": "^2.0"
+        "syntax/steam-api": "^2.3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
