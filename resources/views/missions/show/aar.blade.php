@@ -28,7 +28,8 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '{{ url('/hub/missions/comments') }}/' + id + '/edit',
+                    url: '{{ url("/hub/missions/{$mission->id}/comments") }}/' + caller.data('id') + '/edit',
+
                     success: function(data) {
                         data = JSON.parse(data);
                         $('#submit-mission-comment input[name="id"]').val(id);
@@ -50,11 +51,11 @@
 
                 if (canDelete) {
                     var caller = $(this);
-                    var id = caller.data('id');
 
                     $.ajax({
                         type: 'DELETE',
-                        url: '{{ url("/hub/missions/comments") }}/' + id,
+                        url: '{{ url("/hub/missions/{$mission->id}/comments") }}/' + caller.data('id'),
+
                         success: function(data) {
                             caller.parents('.mission-comment-item').remove();
                         }
@@ -68,8 +69,9 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '{{ url('/hub/missions/comments') }}',
+                    url: '{{ url("/hub/missions/{$mission->id}/comments") }}',
                     data: $('#submit-mission-comment').serialize(),
+
                     success: function(data) {
                         $('#submit-mission-comment input[name="id"]').val(-1);
                         $('#submit-mission-comment textarea[name="text"]').val('');
@@ -80,7 +82,8 @@
 
                         $.ajax({
                             type: 'GET',
-                            url: '{{ url('/hub/missions/comments?mission_id=' . $mission->id) }}',
+                            url: '{{ url("/hub/missions/{$mission->id}/comments") }}',
+
                             success: function(data) {
                                 $('.mission-comments').html(data);
                                 runConvert();
@@ -100,8 +103,9 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '{{ url('/hub/missions/comments') }}',
+                    url: '{{ url("/hub/missions/{$mission->id}/comments") }}',
                     data: $('#submit-mission-comment').serialize(),
+                    
                     success: function(data) {
                         $('#submit-mission-comment input[name="id"]').val(data.trim());
                         $('#auto-save-hint').fadeIn().html('Saved Draft');
