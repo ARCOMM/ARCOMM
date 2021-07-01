@@ -15,7 +15,7 @@
         "dropit": "^1.0.0",
         "dropzone": "^4.3.0",
         "font-awesome": "^4.7.0",
-        "jquery": "^3.2.1",
+        "jquery": "^3.5.0",
         "jquery-ui": "^1.12.1",
         "jquery-ui-bundle": "^1.11.4",
         "jquery.waitforimages": "^2.2.0",
